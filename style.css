@@ -1,0 +1,623 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;1,600&display=swap');
+
+:root {
+  /* main variables, may add some */
+  --clr-secondary-400: 217 19% 35%;
+  --clr-neutral-100: 0 0% 100%;
+  --clr-neutral-200: 210 46% 95%;
+
+  --ff-primary:'Roboto Mono', monospace;
+
+  --fw-400: 500;
+  --fw-700: 600;
+
+  --fs-400: 0.8125rem;
+  --fs-500: 1.25rem;
+
+  /* additional colors */
+  --clr-accent-500: hsl(217, 30%, 14%);
+
+  /* from welcome */
+  --gray: #808080;
+  
+  /* for card */
+  --clr-neutral-900: hsl(207, 19%, 9%);
+  --clr-neutral-100-2: hsl(0, 0%, 100%);
+  --clr-accent-2: #D3D3D3;
+
+  /* for footer */
+  --clr-accent-bg: #17161A;
+  --clr-footer-txt: rgba(255,255,255,0.8);
+  --clr-accent-3: hsl(0, 0%, 15%);
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* navbar START */
+/* Set core body defaults */
+body {
+	margin: 0;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+
+  display: grid;
+  place-content: center;
+
+  font-family: var(--ff-primary);
+  font-weight: var(--fw-400);
+
+  background-color: hsl(var(--clr-neutral-200));
+}
+
+/* navigation styles start here */
+header {
+  background: var(--clr-accent-bg);
+  text-align: center;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+}
+
+/* changed this from the tutorial video to
+   allow it to gain focus, making it tabbable */
+.nav-toggle {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* nav toggle and positioning */
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: white;
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: '';
+  position: absolute;
+}
+
+.nav-toggle-label span::before {
+  bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+  top: 7px;
+}
+
+/* nav bar animation */
+nav {
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  left: 0;
+  background: var(--clr-accent-bg);
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+}
+
+
+/* animation for mobile, basically useless */
+nav a {
+  position: relative;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background: white;
+  position: absolute;
+  top: -.5em;
+  left: 0;
+  right: 0;
+  transform: scale(0, 1);
+  transition: transform ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  transform: scale(1,1);
+}
+
+/* nav elements positioning */
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.nav-toggle:checked ~ nav {
+  transform: scale(1,1);
+}
+
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+
+.logo {
+  font-size: 1.2rem;
+  color: #FFF;
+  font-weight: 300;
+}
+
+header {
+  padding: 10px;
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+  }
+  
+  .logo {
+    grid-column: 2 / 3;
+  }
+  
+  nav {
+    /* all: unset; this causes issues with Edge, since it's unsupported */
+    
+    /* the following lines are not from tutorial, but add Edge support */
+    position: relative;
+    text-align: left;
+    transition: none;
+    transform: scale(1,1);
+    background: none;
+    top: initial;
+    left: initial;
+    /* end Edge support stuff */
+    
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  nav ul {
+    display: flex;
+  }
+  
+  nav li {
+    margin-left: 3em;
+    margin-bottom: 0;
+  }
+  
+  nav a {
+    opacity: 1;
+    position: relative;
+  }
+  
+  nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: white;
+    position: absolute;
+    top: -.75em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+  
+  nav a:hover::before {
+    transform: scale(1,1);
+  }
+}
+/* navbar END */
+
+/* welcome START */
+.welcome {
+  padding-top: 140px;
+  /* margin-bottom: 40px;   */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-contact li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-left: -2.5rem;
+}
+
+.about-contact a {
+  color: var(--gray);
+  text-decoration: none;
+}
+
+.about-contact {
+  display: flex;
+  transform: scale(1.2);
+}
+
+.bt {
+  padding: 5px 10px; 
+  margin: 0.5ch;
+  background: var(--gray);
+  color: white;
+  border-radius: 5px;
+  border: none;
+} 
+
+.bt a,
+.download {
+  color: white;
+}
+
+.bt:hover {
+  background: var(--clr-accent-bg);
+  transition: all .4s ease-out;
+}
+
+i {
+  color: var(--gray);
+}
+
+.pers-desc {
+  width: 70%;
+  font-size: 1.5rem;
+  color: var(--clr-accent-bg);
+}
+/* welcome END */
+
+/* card START*/
+.card {
+  line-height: 3;
+  place-items: center;
+  color: hsl(var(--clr-neutral-100));
+  background-image: url(img/card-bg.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 10rem 0 0;
+  border-radius: 0.5rem;
+
+  /* solves rectangular corners displayed bc of gradient */
+  overflow: hidden; 
+
+  transition: 300ms ease;
+  box-shadow: 2.5rem 3.75rem 3rem -3rem hsl(var(--clr-secondary-400) / 0.25);
+}
+
+.flex {
+  transform: translateY(calc(100% - 2*var(--padding)));
+  transition: 300ms ease;
+}
+
+.card:hover .flex {
+  transform: translateY(0) ;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+.card-content:hover {
+  background: linear-gradient(
+    hsl(0 0% 0% / 0),
+    hsl(20 0% 0% / 0.3) 20%,
+    hsl(0 0% 0% / 1)
+  );
+}
+
+.card-content {
+  --padding: 1.5rem;
+  padding: var(--padding);
+  /* background: linear-gradient(
+    hsl(0 0% 0% / 0),
+    hsl(20 0% 0% / 0.3) 20%,
+    hsl(0 0% 0% / 1)
+  ); */
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card-title {
+  position: relative;
+  width: max-content; /*  as long as title text is 1 line  */
+  max-width: 100%;
+}
+
+.card-title::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: calc(100% + var(--padding));
+  left: 0;
+  bottom: 0;
+  left: calc(var(--padding) * -1);
+  background: var(--clr-neutral-100-2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: 300ms ease;
+}
+
+.card:hover .card-title::after {
+  transform: scaleX(1);
+}
+
+.button {
+  cursor: pointer;
+  display: inline;
+  text-decoration: none;
+  color: var(--clr-neutral-900);
+  background-color: var(--clr-accent-2);
+  padding: 0.5em 1.25em;
+  border-radius: 5px;
+}
+
+.button:hover,
+.button:focus {
+  background-color: hsl(var(--clr-neutral-100));
+}
+
+#project-1 {
+  background-image: url(img/tes.png);
+}
+
+#project-2 {
+  background-image: url(img/survey.png);
+}
+
+#project-3 {
+  background-image: url(img/landing.png);
+}
+
+#project-4 {
+  background-image: url(img/ui.png);
+}
+
+#project-5 {
+  background-image: url(img/question.png);
+}
+/* card END*/
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-weight: var(--fw-700);
+}
+
+/* components */
+.testimonial-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-auto-columns: 1fr;
+  grid-template-areas:
+   'one'
+   'two'
+   'three'
+   'four'
+   'five';
+
+  padding-block: 2rem;
+  width: min(95%, 70rem);
+  margin-inline: auto;
+  padding-top: 75px;
+  padding-bottom: 100px;
+}
+
+.card {
+  font-size: var(--fs-400);
+}
+
+.card:nth-child(1) {
+  grid-area: one;
+}
+.card:nth-child(2) {
+  grid-area: two;
+}
+.card:nth-child(3) {
+  grid-area: three;
+}
+.card:nth-child(4) {
+  grid-area: four;
+}
+.card:nth-child(5) {
+  grid-area: five;
+}
+
+@media screen and (min-width: 33em) {
+  .testimonial-grid {
+      grid-template-areas:
+      "one one"
+      "two three"
+      "five five"
+      "four four";
+  }
+}
+
+@media screen and (min-width: 38em) {
+  .testimonial-grid {
+    grid-template-areas:
+     'one one'
+     'two five'
+     'three five'
+     'four four';
+  }
+}
+
+@media screen and (min-width: 54em) {
+  .testimonial-grid {
+      grid-template-areas:
+      "one one two"
+      "five five five"
+      "three four four";
+  }
+}
+
+@media screen and (min-width: 75em) {
+  .testimonial-grid {
+      grid-template-areas:
+      "one one two five"
+      "three four four five";
+  }
+}
+
+.card > p:first-of-type {
+  font-size: var(--fs-500);
+  line-height: 1.2;
+}
+
+.card > p:last-of-type {
+  opacity: 0.7;
+}
+
+/* footer START */
+footer {
+  background-color: var(--clr-accent-bg);
+  color: var(--clr-footer-txt);
+  display: flex;
+  justify-content: center;
+}
+
+.footer-container {
+  padding: 1.5rem;
+  width: min(95%, 70rem);
+  
+}
+
+.top-row,
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.widgets {
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 38em) {
+  .top-row {
+    display:block;
+  }
+  .bottom-row {
+    display:block;
+  }
+  .email {
+    padding-top: 1.5rem;
+  }
+  .right {
+    padding-top: 1.5rem;
+    white-space: nowrap;
+  }
+}
+
+.site-info {
+  position: relative;
+}
+
+.bottom-row::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  top: -1rem;
+  background-color: var(--clr-accent-3);
+} 
+
+.links a,
+.email a {
+  text-decoration: none;
+  color: var(--clr-footer-txt);
+}
+/* footer END */
