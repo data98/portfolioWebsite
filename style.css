@@ -2,6 +2,7 @@
 
 :root {
   /* main variables, may add some */
+  --clr-just-white: #fff;
   --clr-secondary-400: 217 19% 35%;
   --clr-neutral-100: 0 0% 100%;
   --clr-neutral-200: 210 46% 95%;
@@ -602,6 +603,10 @@ footer {
 
 .widgets {
   margin-bottom: 2rem;
+}
+
+.footer-contact:hover {
+  color: var(--clr-just-white);
 }
 
 @media screen and (max-width: 33em) {
